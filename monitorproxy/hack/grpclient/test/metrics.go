@@ -4,8 +4,9 @@ import (
 	"context"
 	"fmt"
 
+	pb "monitorproxy/metrics"
+
 	json "github.com/golang/protobuf/jsonpb"
-	pb "sdn.io/sdwan/pkg/monitorproxy/cubs/v1/metrics"
 )
 
 func ReportTrafficInfoJSON() {

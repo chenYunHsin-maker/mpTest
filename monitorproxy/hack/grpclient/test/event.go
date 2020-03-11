@@ -7,18 +7,18 @@ import (
 	"github.com/golang/glog"
 	json "github.com/golang/protobuf/jsonpb"
 
-	pb "sdn.io/sdwan/pkg/monitorproxy/cubs/v1/events"
+	pb "monitorproxy/events"
 )
 
 // IPChangedJSON func return formatted JSON
 func IPChangedJSON() {
-	var v pb.Interfaces
+	var v pbevent.Interfaces
 	fmt.Println(exampleJSON(&v, &v))
 }
 
 // IPChanged send the IPChanged to grpc server
-func IPChanged(client pb.CubsEventReportClient, s string) error {
-	var v pb.Interfaces
+func IPChanged(client pbevent.CubsEventReportClient, s string) error {
+	var v pbevent.Interfaces
 	err := json.UnmarshalString(s, &v)
 	if err != nil {
 		return err
@@ -32,15 +32,17 @@ func IPChanged(client pb.CubsEventReportClient, s string) error {
 
 // UserLoginJSON func return formatted JSON
 func UserLoginJSON() {
-	var v pb.UserInfo
+	var v pbevent.UserInfo
 	fmt.Println(exampleJSON(&v, &v))
 }
 
 // UserLogin send the UserLogin to grpc server
-func UserLogin(client pb.CubsEventReportClient, s string) error {
-	var v pb.UserInfo
-	err := json.UnmarshalString(s, &v)
+func UserLogin(client pbevent.CubsEventReportClient, s string) error {
+	var v pbevent.UserInfo
+	//err := json.UnmarshalString(s, &v)
+	err := json.Unmarshal([]byte(s), &v)
 	if err != nil {
+		fmt.Println("json unmarshal err:", err)
 		return err
 	}
 	_, err = client.UserLogin(context.Background(), &v)
@@ -52,13 +54,13 @@ func UserLogin(client pb.CubsEventReportClient, s string) error {
 
 // UserLogoutJSON func return formatted JSON
 func UserLogoutJSON() {
-	var v pb.UserInfo
+	var v pbevent.UserInfo
 	fmt.Println(exampleJSON(&v, &v))
 }
 
 // UserLogout send the UserLogout to grpc server
-func UserLogout(client pb.CubsEventReportClient, s string) error {
-	var v pb.UserInfo
+func UserLogout(client pbevent.CubsEventReportClient, s string) error {
+	var v pbevent.UserInfo
 	err := json.UnmarshalString(s, &v)
 	if err != nil {
 		return err
@@ -72,13 +74,13 @@ func UserLogout(client pb.CubsEventReportClient, s string) error {
 
 // InterfaceStatusChangeJSON func return formatted JSON
 func InterfaceStatusChangeJSON() {
-	var v pb.Interfaces
+	var v pbevent.Interfaces
 	fmt.Println(exampleJSON(&v, &v))
 }
 
 // InterfaceStatusChange send the InterfaceStatusChange to grpc server
-func InterfaceStatusChange(client pb.CubsEventReportClient, s string) error {
-	var v pb.Interfaces
+func InterfaceStatusChange(client pbevent.CubsEventReportClient, s string) error {
+	var v pbevent.Interfaces
 	err := json.UnmarshalString(s, &v)
 	if err != nil {
 		return err
@@ -92,13 +94,13 @@ func InterfaceStatusChange(client pb.CubsEventReportClient, s string) error {
 
 // LinkStateChangeJSON func return formatted JSON
 func LinkStateChangeJSON() {
-	var v pb.Interfaces
+	var v pbevent.Interfaces
 	fmt.Println(exampleJSON(&v, &v))
 }
 
 // LinkStateChange send the LinkStateChange to grpc server
-func LinkStateChange(client pb.CubsEventReportClient, s string) error {
-	var v pb.Interfaces
+func LinkStateChange(client pbevent.CubsEventReportClient, s string) error {
+	var v pbevent.Interfaces
 	err := json.UnmarshalString(s, &v)
 	if err != nil {
 		return err
@@ -112,13 +114,13 @@ func LinkStateChange(client pb.CubsEventReportClient, s string) error {
 
 // PortStateChangeJSON func return formatted JSON
 func PortStateChangeJSON() {
-	var v pb.Ports
+	var v pbevent.Ports
 	fmt.Println(exampleJSON(&v, &v))
 }
 
 // PortStateChange send the PortStateChange to grpc server
-func PortStateChange(client pb.CubsEventReportClient, s string) error {
-	var v pb.Ports
+func PortStateChange(client pbevent.CubsEventReportClient, s string) error {
+	var v pbevent.Ports
 	err := json.UnmarshalString(s, &v)
 	if err != nil {
 		return err
@@ -132,13 +134,13 @@ func PortStateChange(client pb.CubsEventReportClient, s string) error {
 
 // OnVPNEventJSON func return formatted JSON
 func OnVPNEventJSON() {
-	var v pb.VPNEvent
+	var v pbevent.VPNEvent
 	fmt.Println(exampleJSON(&v, &v))
 }
 
 // OnVPNEvent send the VPNEvent to grpc server
-func OnVPNEvent(client pb.CubsEventReportClient, s string) error {
-	var v pb.VPNEvent
+func OnVPNEvent(client pbevent.CubsEventReportClient, s string) error {
+	var v pbevent.VPNEvent
 	err := json.UnmarshalString(s, &v)
 	if err != nil {
 		return err
@@ -152,13 +154,13 @@ func OnVPNEvent(client pb.CubsEventReportClient, s string) error {
 
 // ReportDNSAnswerJSON func return formatted JSON
 func ReportDNSAnswerJSON() {
-	var v pb.DnsAnswer
+	var v pbevent.DnsAnswer
 	fmt.Println(exampleJSON(&v, &v))
 }
 
 // ReportDNSAnswer send the DNSAnswer to grpc server
-func ReportDNSAnswer(client pb.CubsEventReportClient, s string) error {
-	var v pb.DnsAnswer
+func ReportDNSAnswer(client pbevent.CubsEventReportClient, s string) error {
+	var v pbevent.DnsAnswer
 	err := json.UnmarshalString(s, &v)
 	if err != nil {
 		return err
